@@ -6,7 +6,7 @@ class BrainfuckInt:
 	
 	def __init__(self, code):
 		self.bfStatements = ['>', '<', '+', '-', '.', ',', '[', ']']
-		self.mem = [0] * 300
+		self.mem = [0] * 30000
 		self.pntr = 0
 		self.tmpPntr = 0
 		self.codePntr = 0		
@@ -44,7 +44,7 @@ class BrainfuckInt:
 		if x == '[':
 			m = self.pntr
 			tcp = self.codePntr
-			loopend = int
+			loopend = 0
 
 			while self.mem[m] != 0:
 				self.codePntr += 1
