@@ -20,22 +20,42 @@ class BrainfuckInt:
 				temp.append(x)
 		return temp
 
+	def whloop(self):
+		m = self.pntr
+		tcp = self.codePntr
+		loopend = 0
+
+		while self.mem[m] != 0:
+			self.codePntr += 1
+			if self.bfCode[self.codePntr] == ']':
+				loopend = self.codePntr			
+				self.codePntr = tcp
+			else:
+				
+				self.parse(self.bfCode[self.codePntr])
+
+		if self.mem[m] == 0:
+			self.codePntr = loopend
+
 	def parse(self, x):
 		if x == '>': # Move pointer forward
+			print self.pntr
 			self.pntr += 1
 
 		if x == '<': # Move pointer back
+			print self.pntr
 			self.pntr -= 1
 
 		if x == '+': # Increment current byte pos by 1
+			print self.mem[:10]
 			self.mem[self.pntr] += 1
 
 		if x == '-': # Deincrement current byte pos by 1
+			print self.mem[:10]
 			self.mem[self.pntr] += -1
 
 		if x == '.': # Print hex value for byte pos
 			#time.sleep(.2) # Makes it cool... :D
-			print self.codePntr
 			print chr(self.mem[self.pntr]),
 
 		if x == ',': # Get input
@@ -43,23 +63,11 @@ class BrainfuckInt:
 			self.mem[self.pntr] = i
 
 		if x == '[':
-			m = self.pntr
-			tcp = self.codePntr
-			loopend = 0
-
-			while self.mem[m] != 0:
-				self.codePntr += 1
-				if self.bfCode[self.codePntr] == ']':
-					loopend = self.codePntr			
-					self.codePntr = tcp
-				else:
-					self.parse(self.bfCode[self.codePntr])
-
-			if self.mem[m] == 0:
-				self.codePntr = loopend
+			self.whloop()
 
 	def start(self):
 		while self.codePntr < len(self.bfCode):
+			
 			self.parse(self.bfCode[self.codePntr])
 			self.codePntr += 1
 
