@@ -20,29 +20,22 @@ class BrainfuckInt:
 				temp.append(x)
 		return temp
 
-	def debug(self):
-		print str(self.mem[0]) + '|' + str(self.mem[1]) + '|' + str(self.mem[2]) + '|' + str(self.mem[3]) + '|' + str(self.mem[4]) + '|' + str(self.mem[5]) + '|' + str(self.mem[6])
-
 	def parse(self, x):
 		if x == '>': # Move pointer forward
 			self.pntr += 1
 
 		if x == '<': # Move pointer back
-			#print 'called'
 			self.pntr -= 1
 
 		if x == '+': # Increment current byte pos by 1
-			#self.debug()
 			self.mem[self.pntr] += 1
 
 		if x == '-': # Deincrement current byte pos by 1
-			#self.debug()
-			#print self.mem[self.pntr]
 			self.mem[self.pntr] += -1
-			#print self.mem[self.pntr]
 
 		if x == '.': # Print hex value for byte pos
-			print chr(self.mem[self.pntr])
+			time.sleep(.2) # Makes it cool... :D
+			print chr(self.mem[self.pntr]),
 
 		if x == ',': # Get input
 			i = raw_input
@@ -62,7 +55,6 @@ class BrainfuckInt:
 					self.parse(self.bfCode[self.codePntr])
 
 			if self.mem[m] == 0:
-				#print 'loopend'
 				self.codePntr = loopend
 
 	def start(self):
@@ -72,10 +64,16 @@ class BrainfuckInt:
 
 
 if len(sys.argv) > 1:
-	bfFile = sys.argv[1]
-	if os.path.isfile(bfFile):
-		bfCode = list(open(bfFile).read())
+	if sys.argv[1] == '-i':
+		bfCode = sys.argv[2]
 		BrainfuckInt(bfCode)
+
 	else:
-		print "File '" + bfFile + "' not found..."
-		exit()
+
+		bfFile = sys.argv[1]
+		if os.path.isfile(bfFile):
+			bfCode = list(open(bfFile).read())
+			BrainfuckInt(bfCode)
+		else:
+			print "File '" + bfFile + "' not found..."
+			exit()
