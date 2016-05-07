@@ -6,7 +6,7 @@ class BrainfuckInt:
 	
 	def __init__(self, code):
 		self.bfStatements = ['>', '<', '+', '-', '.', ',', '[', ']']
-		self.mem = [0] * 30000
+		self.mem = [0] * 300
 		self.pntr = 0
 		self.tmpPntr = 0
 		self.codePntr = 0		
@@ -34,7 +34,8 @@ class BrainfuckInt:
 			self.mem[self.pntr] += -1
 
 		if x == '.': # Print hex value for byte pos
-			time.sleep(.2) # Makes it cool... :D
+			#time.sleep(.2) # Makes it cool... :D
+			print self.codePntr
 			print chr(self.mem[self.pntr]),
 
 		if x == ',': # Get input
