@@ -31,7 +31,6 @@ class BrainfuckInt:
 				loopend = self.codePntr			
 				self.codePntr = tcp
 			else:
-				
 				self.parse(self.bfCode[self.codePntr])
 
 		if self.mem[m] == 0:
