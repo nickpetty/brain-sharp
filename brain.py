@@ -28,6 +28,7 @@ class BrainfuckInt:
 		while self.mem[m] != 0:
 			self.codePntr += 1
 			if self.bfCode[self.codePntr] == ']':
+				if self.pntr == 
 				loopend = self.codePntr			
 				self.codePntr = tcp
 			else:
@@ -62,7 +63,17 @@ class BrainfuckInt:
 			self.mem[self.pntr] = i
 
 		if x == '[':
-			self.whloop()
+			if self.pntr != 0:
+				pass
+			else:
+				while self.codePntr
+				self.codePntr += 1
+		
+		if x == ']':
+			if self.bfCode[self.codePntr] == ']':
+				if self.pntr == 0:
+					self.codePntr += 1
+					break
 
 	def start(self):
 		while self.codePntr < len(self.bfCode):
